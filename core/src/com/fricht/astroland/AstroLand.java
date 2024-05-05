@@ -1,38 +1,31 @@
 package com.fricht.astroland;
 
-import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
-import com.fricht.astroland.screen.Screen;
+import com.fricht.astroland.screen.MainMenu;
 
 
-public class AstroLand implements ApplicationListener {
+public class AstroLand extends Game {
 
-    SpriteBatch batch;
-    Screen current_screen;
+    public static final int VIEWPORT_WIDTH = 1920 / 2;
+    public static final int VIEWPORT_HEIGHT = 1080 / 2;
+
+    public SpriteBatch batch;
+
+    // always loaded screens
+    private MainMenu menu_screen;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
-        current_screen = new ;
+        menu_screen = new MainMenu(this);
+        setScreen(menu_screen);
     }
 
-    @Override
-    public void resize(int width, int height) {}
-
-    @Override
-    public void render() {
-        ScreenUtils.clear(0f, 0f, 0f, 1f);
-        batch.begin();
-        batch.disableBlending();
-        batch.end();
+    public void goto_menu() {
+        setScreen(menu_screen);
     }
-
-    @Override
-    public void pause() {}
-
-    @Override
-    public void resume() {}
 
     @Override
     public void dispose() {
